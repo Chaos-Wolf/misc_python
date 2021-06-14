@@ -1,5 +1,7 @@
 import random
 import room_map
+from tkinter import *
+from tkinter import ttk
 rooms = []
 structure = []
 creatures = []
@@ -7,6 +9,20 @@ classic_mode = 0
 actions_call = ['i','a','end']
 actions_obj = []
 
+
+window = Tk()
+window.title("Game Redux")	
+window.geometry("750x250")
+labelframe= LabelFrame(window)
+canvas = Canvas(labelframe)
+canvas.pack(side=RIGHT, fill=BOTH, expand=1)
+labelframe.pack(fill= BOTH, expand= 1, padx= 30, pady=30)
+def display_neighbors(s):
+	global canvas
+	x = 0
+	for i in s:
+		ttk.Button(canvas, text= i.name + str(x))
+		x += 1
 #creates object classed for items (weapons and ranged weapons)
 #and creatures (includes the character
 class actions(object):
@@ -62,6 +78,7 @@ def current_loc_silent(x):
 	if classic_mode == 1:
 		return(neighbors)
 	movement = room_map.con(rooms[x.loc],neighbors,x.move_freedom)
+	display_neighbors(movement)
 	return(movement)
 
 #outputs the neighboring rooms to the display
@@ -76,7 +93,9 @@ def current_loc(x):
 		entry+=1
 	return(len(movement))
 def inventory():
-	print("inventroy")
+	print("inventory:")
+	for i in creatures[0].weapons:
+		print(i.name,":",i)
 def attack():
 	print("attack")
 	
@@ -86,12 +105,15 @@ def end():
 		start()
 	if a == 'n':
 		print("GG")
-		exit()
+		quit()
 	else:
 		restart()
 #function the starts at the beginning of the game
 #and sets up the room dimentions 
 def intro():
+	actions_obj.append(actions('i',inventory))
+	actions_obj.append(actions('a',attack))
+	actions_obj.append(actions('end',end))
 	print("Welcome to the Game Redux!!")
 	print("Please choose a game size")
 	h = input("Game Height:")
@@ -134,9 +156,7 @@ def setup():
 	dragon.near_des = 'It becomes swelteringly hot as deafing breaths vibrate the chamber'
 	creatures.append(player)
 	creatures.append(dragon)
-	actions_obj.append(actions('i',inventory))
-	actions_obj.append(actions('a',attack))
-	actions_obj.append(actions('end',end))
+	
 
 #takes the next room the player wants to go to and changes
 #its .loc trait
@@ -186,6 +206,7 @@ def fight(x, y):
 		print("you have",x.weapons[a].kill_des,"the",y.name)
 	if x.hp <= 0:
 		print("you have been",y.weapons[attack_choice].kill_des,"by the",y.name)
+		end()
 
 def mon_move():
 	for i in creatures:
@@ -195,6 +216,7 @@ def mon_move():
 			next = current_loc_silent(i)
 			direction = random.choice(range(len(next)))
 			i.loc = next[direction].loc
+			print(rooms[i.loc].name)
 def check_neigh(x):
 	for i in x:
 		for j in creatures:
@@ -203,13 +225,24 @@ def check_neigh(x):
 			else:
 				if j.loc == i.loc:
 					print(j.near_des)
+def all_clear(x):
+	for i in creatures:
+		if i.name == 'you':
+			continue
+		elif i.loc == x.loc:
+			return(i)
+	return(0)
 # the main loop
 def main():
 	char_move = 0
-	while creatures[0].loc != creatures[1].loc:
+	while all_clear(creatures[0]) == 0:
 		valid = current_loc(creatures[0])
 		if char_move == 2:
+			char_move = 0
 			mon_move()
+			a = all_clear(creatures[0])
+			if a != 0:
+				fight(creatures[0],a)
 		else:
 			char_move += 1
 		neigh = current_loc_silent(creatures[0])
@@ -231,3 +264,4 @@ def start():
 	setup()
 	main()
 start()
+window.mainloop()
