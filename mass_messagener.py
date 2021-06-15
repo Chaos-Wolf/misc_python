@@ -3,6 +3,20 @@ from tkinter import ttk
 import excel_tools
 import email_tools
 
+def importer(column):
+	filepath = excel_tools.Get_Filepath_Gui()
+	if not filepath:
+		return
+	pull = excel_tools.ArrayFromExcel(filepath,column)
+	for i in pull:
+		print(i)
+	return (pull)
+
+def bcc_importer():
+	return importer('email')
+
+def cc_importer():
+	return importer('email')
 #main window
 window = tk.Tk()
 window.title("Mass Messenger")	
@@ -40,6 +54,9 @@ CC_Email.grid(row=0,column=6)
 tk.Label(fr_email_ft, text="BCC").grid(row=0,column=7)
 BCC_Email = ttk.Entry(fr_email_ft)
 BCC_Email.grid(row=0,column=8)
+
+#mass loader from a excel doc
+Import = tk.Button(fr_email_ft, text="Import",command=lambda: importer('email')).grid(row=0,column=9)
 
 txt_edit = tk.Text(ptext).grid(column=0, row=0, sticky="nsew")
 window.mainloop()
