@@ -1,7 +1,7 @@
 import tkinter as tk
 import yagmail
 
-def email_login(username, password, window):
+"""def email_login(username, password, window):
 	try: 
 		test = yagmail.SMTP(username, password)
 		test.send(to=username,subject="External Login",contents="You are succesfully logged in")
@@ -26,7 +26,7 @@ def email_login_gui(user_name):
 	password_input.grid(row=1,column=1)
 	username_input.insert(tk.END,user_name)
 	login_button = tk.Button(main_frame, text="Login", command=lambda: email_login(username_input.get(),password_input.get(),login_window)).grid(row=2,column=0)
-	return True
+	return True"""
 def email_send(To,From,Subject,Contents,CC,BCC):
 	if To == "":
 		To = From

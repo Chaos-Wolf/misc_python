@@ -35,7 +35,7 @@ def cc_importer(c):
 def main():
 	#main window
 	window = tk.Tk()
-	window.title("Mass Messenger")	
+	window.title("Mass Messenger v 0.0.1")	
 
 	#making tabs
 	tabControl = ttk.Notebook(window)
@@ -57,12 +57,12 @@ def main():
 	fr_email_body = tk.Frame(email,relief=tk.RAISED,bd=2)
 	fr_email_body.grid(row=1,column=0)
 	#from
-	tk.Label(fr_email_ft, text="From").grid(row=0,column=0)
+	tk.Label(fr_email_ft, text="From:").grid(row=0,column=0)
 	From_Email = tk.Entry(fr_email_ft)
 	From_Email.grid(row=0,column=1)
-	Login = tk.Button(fr_email_ft,text="Login",command=lambda: email_tools.email_login_gui(From_Email.get())).grid(row=0,column=2)
+#	Login = tk.Button(fr_email_ft,text="Login",command=lambda: email_tools.email_login_gui(From_Email.get())).grid(row=0,column=2)
 	#to
-	tk.Label(fr_email_ft, text="To").grid(row=0,column=3)
+	tk.Label(fr_email_ft, text="To:").grid(row=0,column=3)
 	To_Email = tk.Entry(fr_email_ft)
 	To_Email.grid(row=0,column=4)
 	#cc
@@ -72,7 +72,7 @@ def main():
 	BCC_Email = tk.Text(fr_email_body, width='25')
 	BCC_Email.grid(row=1,column=2)
 
-	tk.Label(fr_email_ft, text="Subject").grid(row=0,column=5)
+	tk.Label(fr_email_ft, text="Subject:").grid(row=0,column=5)
 	Subject_Email = tk.Entry(fr_email_ft)
 	Subject_Email.grid(row=0,column=6)
 	#mass loader from a excel doc
@@ -87,7 +87,7 @@ def main():
 
 
 
-	txt_edit = tk.Text(ptext).grid(column=0, row=0, sticky="nsew")
+	txt_edit = tk.Label(ptext,text="To be added").grid(column=0, row=0)
 	window.mainloop()
 if __name__ == "__main__":
 	main()
