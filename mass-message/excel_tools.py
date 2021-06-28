@@ -8,9 +8,9 @@ def ArrayFromExcel(filepath,column):
 		array.append(data.at[i,column])
 	return array
 
-def Get_Filepath_Gui():
+def Get_Filepath_Gui(file,ex):
     """Open a file for editing."""
-    filepath = askopenfilename(filetypes=[("Excel Files", "*.xlsx"), ("All Files", "*.*")])
+    filepath = askopenfilename(filetypes=[(file, ex)])
     if not filepath:
         return
     return(filepath)

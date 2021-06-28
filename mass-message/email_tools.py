@@ -27,15 +27,15 @@ def email_login_gui(user_name):
 	username_input.insert(tk.END,user_name)
 	login_button = tk.Button(main_frame, text="Login", command=lambda: email_login(username_input.get(),password_input.get(),login_window)).grid(row=2,column=0)
 	return True"""
-def email_send(To,From,Subject,Contents,CC,BCC):
+def email_send(To,From,Subject,Contents,Attachments,CC,BCC):
 	if To == "":
 		To = From
 	try:
 		yag = yagmail.SMTP(From)
-		yag.send(to=To,subject=Subject,contents=Contents,cc=CC,bcc=BCC)
+		yag.send(to=To,subject=Subject,contents=Contents,attachments=Attachments,cc=CC,bcc=BCC)
 		sent_window = tk.Tk()
 		sent_window.title("Sent")
-		sent_window.geometry('50x50')
+		sent_window.geometry('200x200')
 		sent_label = tk.Label(sent_window,text="Emails Sent")
 		sent_label.grid(row=0,column=0)
 	except Exception as e:
