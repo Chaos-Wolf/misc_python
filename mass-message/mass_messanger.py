@@ -33,6 +33,14 @@ def attachment_import():
 	Attachment_Email.insert(tk.END, filepath)
 	Attachment_Email.insert(tk.END, "\n")
 	
+def text_importer(c):
+	pull = importer(c)
+	for i in pull:
+		Text_List.insert(tk.END, i)
+		if i != pull[-1]:
+			Text_List.insert(tk.END, "\n")
+	return True
+	
 #main window
 window = tk.Tk()
 window.title("Mass Messenger v 0.0.1")	
@@ -46,6 +54,7 @@ tabControl.add(email, text = 'Mass Email')
 tabControl.add(ptext, text = 'Mass Text')
 tabControl.pack(expand = 1)
 
+#email tab contents
 email.columnconfigure((0,5), weight=1)
 email.rowconfigure((0,5),weight=1)
 
@@ -90,7 +99,22 @@ Attachment_Email = tk.Text(fr_email_body, width='30')
 Attachment_Email.grid(row=1,column=0)
 Send_Button = tk.Button(fr_email_ft, text="Send", command=lambda: email_tools.email_send(To_Email.get(),From_Email.get(), Subject_Email.get(), Body_Email.get("1.0","end-1c"),email_list_create(Attachment_Email.get("1.0","end-1c")),email_list_create(CC_Email.get("1.0","end-1c")),email_list_create(BCC_Email.get("1.0","end-1c")))).grid(row=0,column=7)
 
+#text tab contents
+fr_text_ft = tk.Frame(ptext,relief=tk.RAISED,bd=2)
+fr_text_ft.grid(row=0,column=0)
 
+#from
+From_Number_Label = tk.Label(fr_text_ft,text="From: (").grid(column=0, row=0)
+From_Number_Area = tk.Entry(fr_text_ft,width=3)
+From_Number_Area.grid(row=0,column=1)
+From_Number_Label2 = tk.Label(fr_text_ft,text=") - ").grid(row=0,column=2)
+From_Number_First3 = tk.Entry(fr_text_ft,width=3)
+From_Number_First3.grid(row=0,column=3)
+From_Number_Label3 = tk.Label(fr_text_ft,text=" - ").grid(row=0,column=4)
+From_Number_Last4 = tk.Entry(fr_text_ft,width=4)
+From_Number_Last4.grid(row=0,column=5)
 
-txt_edit = tk.Label(ptext,text="To be added").grid(column=0, row=0)
+Text_Import = tk.Button(fr_text_ft, text="Text Import",command=lambda: text_importer('Cell Number')).grid(row=0,column=6)
+Text_List = tk.Text(fr_text_ft, width='25')
+Text_List.grid(row=0,column=7)
 window.mainloop()
