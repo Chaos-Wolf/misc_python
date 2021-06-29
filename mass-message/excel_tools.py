@@ -3,9 +3,12 @@ import tkinter
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 def ArrayFromExcel(filepath,column):
 	data = pandas.read_excel(filepath)
+	data[column] = data[column].fillna("NaN")
 	array = []
 	for i in range(data.shape[0]):
-		array.append(str(data.at[i,column]))
+		if data.at[i,column] == "NaN":
+			continue			
+		array.append(data.at[i,column])
 	return array
 
 def Get_Filepath_Gui(file,ex):
