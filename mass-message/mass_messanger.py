@@ -8,28 +8,60 @@ def email_list_create(List):
 	x = List.splitlines(False)
 	return x
 		
+def location_pull(pull):
+	choices = []
+	for i in pull:
+		if len(choices) == 0:
+			choices.append(i.location)
+		flag = 0
+		for x in choices:
+			if i.location == x:
+				flag = 1
+		if flag == 0:
+			choices.append(i.location)
+	if len(choices) == 1:
+		return(pull)
+	choice = excel_tools.SheetChoice(choices)
+	temp = list(choice)
+	final_choice = []
+	z = 0
+	for j in choices:
+		if temp[z] == "x":
+			final_choice.append(j)
+		z=z+1
+	final_pull = []
+	for k in pull:
+		for l in final_choice:
+			if k.location == l:
+				final_pull.append(k)
+	return(final_pull)
 
-def importer(column):
+def importer():
 	filepath = excel_tools.Get_Filepath_Gui("Excel Files","*.xlsx")
 	if not filepath:
 		return
-	pull = excel_tools.ArrayFromExcel(filepath,column)
+	first_pull = excel_tools.ArrayofObjFromExcel(filepath)
+	pull = location_pull(first_pull)
 	return (pull)
-def bcc_importer(c):
-	pull = importer(c)
+def bcc_importer():
+	pull = importer()
 	if not pull:
 		return False
 	for i in pull:
-		BCC_Email.insert(tk.END, i)
+		if i.email == "NaN":
+			continue
+		BCC_Email.insert(tk.END, i.email)
 		if i != pull[-1]:
 			BCC_Email.insert(tk.END, "\n")
 	return True
-def cc_importer(c):
-	pull = importer(c)
+def cc_importer():
+	pull = importer()
 	if not pull:
 		return False
 	for i in pull:
-		CC_Email.insert(tk.END, i)
+		if i.email == "NaN":
+			continue
+		CC_Email.insert(tk.END, i.email)
 		if i != pull[-1]:
 			CC_Email.insert(tk.END, "\n")
 	return True
@@ -38,14 +70,17 @@ def attachment_import():
 	Attachment_Email.insert(tk.END, filepath)
 	Attachment_Email.insert(tk.END, "\n")
 	
-def text_importer(c):
-	pull = importer(c)
+def text_importer():
+	pull = importer()
 	if not pull:
 		return False
 	for i in pull:
-		j = str(i)
-		j = j[:-1]
-		j = j[:-1]
+		if i.number == "NaN":
+			continue
+		j = str(i.number)
+		if j[-2] == ".":
+			j = j[:-1]
+			j = j[:-1]
 		Text_List.insert(tk.END, j)
 		if i != pull[-1]:
 			Text_List.insert(tk.END, "\n")
@@ -86,18 +121,18 @@ tk.Label(fr_email_ft, text="To:").grid(row=0,column=3)
 To_Email = tk.Entry(fr_email_ft)
 To_Email.grid(row=0,column=4)
 #cc
-CC_Email = tk.Text(fr_email_body, width='25')
+CC_Email = tk.Text(fr_email_body, width='30')
 CC_Email.grid(row=1,column=2)
 #bcc
-BCC_Email = tk.Text(fr_email_body, width='25')
+BCC_Email = tk.Text(fr_email_body, width='30')
 BCC_Email.grid(row=1,column=3)
 
 tk.Label(fr_email_ft, text="Subject:").grid(row=0,column=5)
 Subject_Email = tk.Entry(fr_email_ft)
 Subject_Email.grid(row=0,column=6)
 #mass loader from a excel doc
-BCC_Import = tk.Button(fr_email_body, text="BCC Import",command=lambda: bcc_importer('Email')).grid(row=0,column=3)
-CC_Import = tk.Button(fr_email_body, text="CC Import",command=lambda: cc_importer('Email')).grid(row=0,column=2)
+BCC_Import = tk.Button(fr_email_body, text="BCC Import",command=lambda: bcc_importer()).grid(row=0,column=3)
+CC_Import = tk.Button(fr_email_body, text="CC Import",command=lambda: cc_importer()).grid(row=0,column=2)
 email_txt_edit_label = tk.Label(fr_email_body, text="Message body").grid(column=1, row=0,)
 #message body
 Body_Email= tk.Text(fr_email_body)
@@ -127,7 +162,7 @@ Subject_Text.grid(row=0,column=3)
 tk.Label(fr_text_body,text="Message body").grid(row=0,column=0)
 Text_Body = tk.Text(fr_text_body)
 Text_Body.grid(row=1,column=0)
-Text_Import = tk.Button(fr_text_body, text="Text Import",command=lambda: text_importer('Cell Number')).grid(row=0,column=1)
+Text_Import = tk.Button(fr_text_body, text="Text Import",command=lambda: text_importer()).grid(row=0,column=1)
 Text_List = tk.Text(fr_text_body, width='25')
 Text_List.grid(row=1,column=1)
 window.mainloop()

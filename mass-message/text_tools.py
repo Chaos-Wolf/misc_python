@@ -8,7 +8,7 @@ def	getCarrier(number):
 	try:
 		html = requests.get(url).text
 		data =	json.loads(html)
-		carrier = data["carrier"]["mobile_network_code"]
+		carrier = data["carrier"]["name"]
 	except:
 		return False
 	time.sleep(1)
