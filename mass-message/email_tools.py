@@ -27,6 +27,10 @@ def email_login_gui(user_name):
 	username_input.insert(tk.END,user_name)
 	login_button = tk.Button(main_frame, text="Login", command=lambda: email_login(username_input.get(),password_input.get(),login_window)).grid(row=2,column=0)
 	return True"""
+
+#takes a recipient, the sender, a subject,contents, attachments and both CC and BCC and attempts to send a email
+#will throw a error message if the email doesnt work. will also give a popup window if the message sent
+#can also work for text messages if you add the right suffix to the end of the number in the mass text tab
 def email_send(To,From,Subject,Contents,Attachments,CC,BCC):
 	if To == "":
 		To = From
