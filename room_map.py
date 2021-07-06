@@ -1,24 +1,26 @@
 import random
+import threading
 
 #room object defined here
 class Room:
-	name = "none"
-	x = 0
-	y = 0
-	z = 0
-	w = 0
-	v = 0
-	p = 0
-	loc = 0
-	am = 0
+	def __init__(self,name,x,y,z,w,v,p):
+		self.name = name
+		self.x = x
+		self.y = y
+		self.z = z
+		self.w = w
+		self.v = v
+		self.p = p
+		self.loc = 0
+		self.neigh_loc = []
+		self.am = 0
 
 #creating a random room object and returning it
 def rand_room():
-	room = Room()
 	a = random.choice(range(100))
 	if a > 74 :
-		room.am = "#"
-	return(room)
+		return("#")
+	return(0)
 
 #creating a empty array for the rooms to be housed
 #to create a set with less dimentions set the unwanted ones to 1
@@ -41,14 +43,8 @@ def room_fill(x):
 					for e in x[one][two][three][four]:
 						six=0
 						for f in x[one][two][three][four][five]:
-							x[one][two][three][four][five][six] = rand_room()
-							x[one][two][three][four][five][six].name = str(six)+str(five)+str(four)+str(three)+str(two)+str(one)
-							x[one][two][three][four][five][six].x = six
-							x[one][two][three][four][five][six].y = five
-							x[one][two][three][four][five][six].z = four
-							x[one][two][three][four][five][six].w = three
-							x[one][two][three][four][five][six].v = two
-							x[one][two][three][four][five][six].p = one
+							x[one][two][three][four][five][six] = Room(str(six)+","+str(five)+","+str(four)+","+str(three)+","+str(two)+","+str(one),six,five,four,three,two,one)
+							x[one][two][three][four][five][six].am = rand_room()
 							six=six+1
 						five=five+1
 					four=four+1
@@ -60,7 +56,7 @@ def room_fill(x):
 #a easy way to create cube in any inputed hieght and in different inputted dimenstions
 def cube_room_create(h,d):
 	r = []
-	if d == 2:
+	if d == 2 and h == 20:
 		print("engage classic mode")
 		cave_names = ["golgari layer","death wind caverns","kraken layer",
 					  "elf ruins","wolfir den","cave of sorrows",
@@ -70,11 +66,13 @@ def cube_room_create(h,d):
 					  "murderous ruin","vampire roost","zombie grave cave",
 					  "bloody caverns","deadly ruins" ] 
 		for i in range(20):
-			room = Room()
+			room = Room("none",i,i,i,i,i,i)
 			room.name = cave_names[i]
 			room.loc = i
 			r.append(room)
 		return(r)
+	elif d == 2:
+		r = empty_room_array(h,h,1,1,1,1)
 	elif d == 3:
 		r = empty_room_array(h,h,h,1,1,1)
 	elif d == 4:
@@ -115,6 +113,7 @@ def real(s):
 								real.append(f)
 	for x in range(len(real)):
 		real[x].loc = x
+	print(len(real))
 	return(real)
 
 #a list of all rooms that are within one space of the inputted room
@@ -122,35 +121,55 @@ def connections(x,r):
 	con = []
 	for g in r:
 		if (g.x == x.x or g.x-1 == x.x or g.x+1 == x.x) and (g.y == x.y or g.y-1 == x.y or g.y+1 == x.y) and (g.z == x.z or g.z-1 == x.z or g.z+1 == x.z) and (g.w == x.w or g.w-1 == x.w or g.w+1 == x.w) and (g.v == x.v or g.v-1 == x.v or g.v+1 == x.v) and (g.p == x.p or g.p-1 == x.p or g.p+1 == x.p):
-			con.append(g)
+			con.append(g.loc)
 	return(con) 
 
 #same as above but is able to define how many dimensions of travel is allowed
-def con(x,c,d):
+def con(x,c,d,r):
 	con = []
 	for g in c:
 		dif = 0
-		if g.x != x.x:
+		if r[g].x != x.x:
 			dif+=1
-		if g.y != x.y:
+		if r[g].y != x.y:
 			dif+=1
-		if g.z != x.z:
+		if r[g].z != x.z:
 			dif+=1
-		if g.w != x.w:
+		if r[g].w != x.w:
 			dif+=1
-		if g.v != x.v:
+		if r[g].v != x.v:
 			dif+=1
-		if g.p != x.p:
+		if r[g].p != x.p:
 			dif+=1
 		if dif <= d and dif > 0:
 			con.append(g)
 	return(con)
-
-#returns a list of all connections for each room
-def all_con(r):
+def thread_con(r):
 	them = []
 	for x in r:
 		them.append(connections(x,r))
+	return(them)
+#returns a list of all connections for each room
+def all_con(r):
+	div_val = 4
+	div = len(r)//div_val
+	split_list = []
+	them = []*div_val
+	for i in range(div_val):
+		temp_list = []
+		for x in range((div * i),(div+(div*i))):
+			temp_list.append(r[x])
+		if i == (div_val-1):
+			for y in range(div_val*div,len(r)):
+				temp_list.append(r[y])
+		split_list.append(temp_list)
+	thread_list=[]
+	for j in range(div_val):
+		thread = threading.Thread(target=thread_con, args=(split_list[j]))
+		thread.start()
+		thread_list.append(thread)
+	for k in range(div_val):
+		print(thread_list[k].join())
 	return(them)
 
 #a print tool for two dimentions
