@@ -1,6 +1,5 @@
 import random
 import threading
-
 #room object defined here
 class Room:
 	def __init__(self,name,x,y,z,w,v,p):
@@ -52,7 +51,83 @@ def room_fill(x):
 			two=two+1
 		one=one+1
 	return(x)
-
+def new_rand_room(r):
+	new = []
+	for i in range(3):
+		temp = [0,0,0,0,0,0]
+		temp_num = 3
+		for x in range(r):
+			if temp_num > 0:
+				temp[x] = random.choice(range(-1,2))
+				if temp[x] != 0:
+					temp_num = temp_num - 1
+		new.append(temp)
+	return(new)
+def smart_room_fill(x,h,r):
+	total_rooms = 0
+	if (pow(h,r)/4) <= 10000:
+		total_rooms = pow(h,r)//4
+	else:
+		total_rooms = 10000
+	one=0
+	for a in x:
+		two=0
+		for b in x[one]:
+			three=0
+			for c in x[one][two]:
+				four=0
+				for d in x[one][two][three]:	
+					five=0
+					for e in x[one][two][three][four]:
+						six=0
+						for f in x[one][two][three][four][five]:
+							x[one][two][three][four][five][six] = Room(str(six)+","+str(five)+","+str(four)+","+str(three)+","+str(two)+","+str(one),six,five,four,three,two,one)
+							six=six+1
+						five=five+1
+					four=four+1
+				three=three+1
+			two=two+1
+		one=one+1
+	x[0][0][0][0][0][0].am = "#"
+	print("total rooms to create: ", total_rooms)
+	one=0
+	for a in x:
+		two=0
+		for b in x[one]:
+			three=0
+			for c in x[one][two]:
+				four=0
+				for d in x[one][two][three]:	
+					five=0
+					for e in x[one][two][three][four]:
+						six=0
+						for f in x[one][two][three][four][five]:
+							if x[one][two][three][four][five][six].am == "#" and total_rooms > 0:
+								n = new_rand_room(r)
+								for j in range(len(n)):
+									if one+n[j][0] == len(x) or one+n[j][0] < 0:
+										n[j][0] = 0
+									if two+n[j][1] == len(a) or two+n[j][1] < 0:
+										n[j][1] = 0
+									if three+n[j][2] == len(b) or three+n[j][2] < 0:
+										n[j][2] = 0
+									if four+n[j][3] == len(c) or four+n[j][3] < 0:
+										n[j][3] = 0
+									if five+n[j][4] == len(d) or five+n[j][4] < 0:
+										n[j][4] = 0
+									if six+n[j][5] == len(e) or six+n[j][5] < 0:
+										n[j][5] = 0
+								for y in n:
+									if x[one+y[0]][two+y[1]][three+y[2]][four+y[3]][five+y[4]][six+y[5]].am != "#":
+										x[one+y[0]][two+y[1]][three+y[2]][four+y[3]][five+y[4]][six+y[5]].am = "#"
+										total_rooms = total_rooms - 1
+							six=six+1
+						five=five+1
+					four=four+1
+				three=three+1
+			two=two+1
+		one=one+1				
+	return(x)
 #a easy way to create cube in any inputed hieght and in different inputted dimenstions
 def cube_room_create(h,d):
 	r = []
@@ -82,8 +157,10 @@ def cube_room_create(h,d):
 	elif d == 6:
 		r = empty_room_array(h,h,h,h,h,h)
 	else:
+		d = 6
 		r = empty_room_array(h,h,h,h,h,h)
-	r = room_fill(r)
+	#r = room_fill(r)
+	r = smart_room_fill(r,h,d)
 	return(real(r))
 #makes a basic map of the array, mostly for debuggin purposes
 def room_map(x):

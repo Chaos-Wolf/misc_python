@@ -157,8 +157,8 @@ def intro():
 #creates the local object classes
 #starts after intro()
 def setup():
-	dragon = creature("dragon",1,20,10,6,6)
-	player = creature("you",0,10,1,3,3)
+	dragon = creature("dragon",random.choice(range(1,len(rooms))),20,10,6,6)
+	player = creature("you",0,10,1,3,1)
 	player.weapons.append(weapon('Sword',2,0,'sliced','disenbowled'))
 	player.weapons.append(ranged_weapon('Bow',1,1,'shot','impaled',10))
 	dragon.weapons.append(weapon('Claws',2,0,'gouged','disenbowled'))
