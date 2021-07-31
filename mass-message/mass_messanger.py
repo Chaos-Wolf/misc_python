@@ -134,11 +134,10 @@ def text_importer():
 				name = text_tools.getCarrier(j)
 				suf = Num_Suf[name]
 				j = j + suf
-				#print("complete: ",j)
+				print("complete: ",j)
 			except:
 				incomplete.append(j)
-				print(name)
-				#print("incomplete: ", j)
+				print("incomplete: ", j)
 				continue
 			complete.append(j)
 		for k in complete:
@@ -147,6 +146,7 @@ def text_importer():
 				Text_List.insert(tk.END, "\n")
 		return True
 	except Exception as e:
+		print(e)
 		return False
 	
 #main window
