@@ -17,9 +17,11 @@ def email_send(To,From,Subject,Contents,Attachments,CC,BCC):
 		sent_label = tk.Label(sent_window,text="Emails Sent")
 		sent_label.grid(row=0,column=0)
 	except Exception as e:
-		print(e)
+		print("error")
+		if e == "(534, b'5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbs\n5.7.14 tLCMxg7EmtANXLMdpLZrIBrXlq80v5Ynq47gAEWNJzxLOhO1oyYeoliBSjZtvIH4fe49r\n5.7.14 ebIErY4qLgWyzpoW5mwDkgEj-zlGFuJQ-V-vdoSp1r8XNw-32UE1BH3pJkhnONkE>\n5.7.14 Please log in via your web browser and then try again.\n5.7.14  Learn more at\n5.7.14  https://support.google.com/mail/answer/78754 b21sm446310lfb.169 - gsmtp')":
+			e = "Please sign into your account in your webbrowser\nThen restart this application and try again\nYou also might have to set your security settings to allow for third party apps"
 		error_window = tk.Tk()
 		error_window.title("Error")
 		error_label = tk.Label(error_window, text=e)
 		error_label.grid(row=0,column=0)
-        (534, b'5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbs\n5.7.14 tLCMxg7EmtANXLMdpLZrIBrXlq80v5Ynq47gAEWNJzxLOhO1oyYeoliBSjZtvIH4fe49r\n5.7.14 ebIErY4qLgWyzpoW5mwDkgEj-zlGFuJQ-V-vdoSp1r8XNw-32UE1BH3pJkhnONkE>\n5.7.14 Please log in via your web browser and then try again.\n5.7.14  Learn more at\n5.7.14  https://support.google.com/mail/answer/78754 b21sm446310lfb.169 - gsmtp')
+        
