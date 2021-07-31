@@ -59,34 +59,43 @@ def importer():
 #they skip each object that doesnt have a email adress and insert the ones that
 #do into their respective text boxes
 def bcc_importer():
-	pull = importer()
-	if not pull:
+	try:
+		pull = importer()
+		if not pull:
+			return False
+		for i in pull:
+			if i.email == "NaN":
+				continue
+			BCC_Email.insert(tk.END, i.email)
+			if i != pull[-1]:
+				BCC_Email.insert(tk.END, "\n")
+		return True
+	except Exception as e:
 		return False
-	for i in pull:
-		if i.email == "NaN":
-			continue
-		BCC_Email.insert(tk.END, i.email)
-		if i != pull[-1]:
-			BCC_Email.insert(tk.END, "\n")
-	return True
 def cc_importer():
-	pull = importer()
-	if not pull:
+	try:
+		pull = importer()
+		if not pull:
+			return False
+		for i in pull:
+			if i.email == "NaN":
+				continue
+			CC_Email.insert(tk.END, i.email)
+			if i != pull[-1]:
+				CC_Email.insert(tk.END, "\n")
+		return True
+	except Exception as e:
 		return False
-	for i in pull:
-		if i.email == "NaN":
-			continue
-		CC_Email.insert(tk.END, i.email)
-		if i != pull[-1]:
-			CC_Email.insert(tk.END, "\n")
-	return True
 
 #this lets the user select a file using the excel_tools.Get_Filepath_Gui() gui
 #then insterts the filepath into the attachments text box
 def attachment_import():
-	filepath = excel_tools.Get_Filepath_Gui("All Files","*.*")
-	Attachment_Email.insert(tk.END, filepath)
-	Attachment_Email.insert(tk.END, "\n")
+	try:
+		filepath = excel_tools.Get_Filepath_Gui("All Files","*.*")
+		Attachment_Email.insert(tk.END, filepath)
+		Attachment_Email.insert(tk.END, "\n")
+	except Exception as e:
+		return False
 
 #does the same thing as the cc_importer except it parses through the final data and 
 #adds carrier suffixes where it can
@@ -103,34 +112,42 @@ def text_importer():
 		'UNITED STATES CELLULAR CORP. -' : '@email.uscc.net',
 		'SPRINT SPECTRUM L.P.' : '@messaging.sprintpcs.com',
 		'CELLCO PARTNERSHIP DBA VERIZON' : '@vtext.com',
-		'D&E/OMNIPOINT WIREL JOINT VENT' : '@tmomail.net'
+		'D&E/OMNIPOINT WIREL JOINT VENT' : '@tmomail.net',
+		'METRO PCS, INC.' : '@mymetropcs.com',
+		'COMCAST IP PHONE, LLC' : '@vtext.com',
+		'POWERTEL NASHVILLE LICENSES, I' : 'tmomail.net'
 	}
-	pull = importer()
-	if not pull:
+	try:
+		pull = importer()
+		if not pull:
+			return False
+		complete = []
+		incomplete = []
+		for i in pull:
+			if i.number == "NaN":
+				continue
+			j = str(i.number)
+			if j[-2] == ".":
+				j = j[:-1]
+				j = j[:-1]
+			try:
+				name = text_tools.getCarrier(j)
+				suf = Num_Suf[name]
+				j = j + suf
+				#print("complete: ",j)
+			except:
+				incomplete.append(j)
+				print(name)
+				#print("incomplete: ", j)
+				continue
+			complete.append(j)
+		for k in complete:
+			Text_List.insert(tk.END, k)
+			if k != pull[-1]:
+				Text_List.insert(tk.END, "\n")
+		return True
+	except Exception as e:
 		return False
-	complete = []
-	incomplete = []
-	for i in pull:
-		if i.number == "NaN":
-			continue
-		j = str(i.number)
-		if j[-2] == ".":
-			j = j[:-1]
-			j = j[:-1]
-		try:
-			suf = Num_Suf[text_tools.getCarrier(j)]
-			j = j + suf
-			print("complete: ",j)
-		except:
-			incomplete.append(j)
-			print("incomplete: ", j)
-			continue
-		complete.append(j)
-	for k in complete:
-		Text_List.insert(tk.END, k)
-		if k != pull[-1]:
-			Text_List.insert(tk.END, "\n")
-	return True
 	
 #main window
 window = tk.Tk()

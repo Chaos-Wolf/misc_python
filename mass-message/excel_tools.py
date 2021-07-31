@@ -24,10 +24,10 @@ class Recipient:
 #it takes itself as a varible and changes the text
 #to the oppisite of what it was
 def	Toggle(but):
-	if but.config('text')[-1] == "True":
-		but.config(text="False")
+	if but.config('text')[-1] == "Yes":
+		but.config(text="No")
 	else:
-		but.config(text="True")
+		but.config(text="Yes")
 
 #the function for the all button
 #if anything is false it is flipped to true
@@ -36,15 +36,15 @@ def	Toggle(but):
 def Select_All(buttons):
 	trues = 0
 	for i in buttons:
-		if i.config('text')[-1] == "True":
+		if i.config('text')[-1] == "Yes":
 			trues = trues + 1
 	if trues == len(buttons):
 		for i in buttons:
-			i.config(text="False")
+			i.config(text="No")
 		return(False)
 	for i in buttons:
-		if i.config('text')[-1] == "False":
-			i.config(text="True")
+		if i.config('text')[-1] == "No":
+			i.config(text="Yes")
 
 #the import function for SheetChoice
 #takes a list of buttons and reads their text
@@ -53,7 +53,7 @@ def pull_buttons(buttons):
 	i = 0
 	final = ""
 	for x in buttons:
-		if x.config('text')[-1] == "True":
+		if x.config('text')[-1] == "Yes":
 			final = final + "x"
 		else:
 			final = final + "o"
@@ -73,7 +73,7 @@ def	SheetChoice(sheets):
 		sheet_window.destroy()
 	for x in sheets:
 		but_list.append(tkinter.Button(sheet_window,width=12))
-		but_list[i].config(text="False", command=lambda j=i: Toggle(but_list[j]))
+		but_list[i].config(text="No", command=lambda j=i: Toggle(but_list[j]))
 		but_list[i].grid(row=1,column=i)
 		tkinter.Label(sheet_window,text=x).grid(row=0,column=i)
 		i = i	+ 1
