@@ -1,3 +1,13 @@
+def Order(n):
+	import random
+	order = []
+	for i in range(n):
+		order.append(i+1)
+	for x in range(n):
+		ran = len(order)
+		num = random.choice(range(ran))
+		print(order[num])
+		del order[num]
 def planes(n):
     from random import choice
     plane=["|Mount Celestia|", "|Bytopia       |", "|Elysium       |",
