@@ -1,12 +1,83 @@
 Broom,Common,Just a broom,0
 Pan,Common,Cast iron pan,0
+Fork,common,A small metal fork,0
+Butter Knife,common,A small metal knife,0
+Broken Mirror,common,A small broken mirror,0
+History Book,common,A textbook about the history of Alba,0
+History Book,common,A textbook about the history of Fainne,0
+History Book,common,A textbook about the history of Udrar,0
+History Book,common,A textbook about the history of Xotrad,0
+History Book,common,A textbook about the history of Naclil,0
+History Book,common,A textbook about the history of Xogron,0
+History Book,common,A textbook about the history of Magic,0
+Ruined Book,common,A old book that has been waterlogged and is now unreadable,0
+Ruined Book,common,A old book that is charred and blackened to the point of unreadability,0
+Scarf,common,A colorful wool scarf,0
+Spoon,common,A small metal spoon,0
+Necklace,common,A woven hemp necklace with a amber pendant,0
+Necklace,common,A woven hemp necklace with a wooden pendant,0
+Necklace,common,A woven hemp necklace with a steel pendant,0
+Necklace,common,A woven hemp necklace with a quartz pendant,0
+Necklace,common,A woven hemp necklace with a glass pendant,0
+Bracelet,common,A woven hemp bracklet with bone beads,0
+Bracelet,common,A woven hemp bracklet with glass beads,0
+Bracelet,common,A woven hemp bracklet with metal beads,0
+Bracelet,common,A woven hemp bracklet,0
+Thread,common,A spool of white thread,0
+Thread,common,A spool of blue thread,0
+Thread,common,A spool of green thread,0
+Thread,common,A spool of black thread,0
+Thread,common,A spool of yellow thread,0
+Thread,common,A spool of brown thread,0
+Thread,common,A spool of red thread,0
+Thread,common,A spool of white thread that never runs out,1
+Siccors,common,A metal pair of siccors,0
+Postcard,common,A postcard depicting a lush forest,0
+Postcard,common,A postcard depicting a mountian,0
+Postcard,common,A postcard depicting a beach,0
+Postcard,common,A postcard depicting a ocean,0
+Postcard,common,A postcard depicting a grassland,0
+Postcard,common,A postcard depicting a desert,0
+Sewing Needle,common,A sewing needle made out of steel,0 
+Sewing Needle,common,A sewing needle made out of bronze,0
+Sewing Needle,common,A sewing needle made out of bone,0
+Sewing Needle,common,A magical sewing needle that is unbreakable,1
+Candle,common,A white wax candle,0
+Candle,common,A red wax candle,0
+Candle,common,A blue wax candle,0
+Candle,common,A black wax candle,0
+Candle,common,A bees wax candle,0
+Candle,common,"A black wax candle, when lit all undead have disadvantage on saving throws when within 15ft of it",1
+Lock of Hair,common,A lock of blond hair,0
+Lock of Hair,common,A lock of black hair,0
+Lock of Hair,common,A lock of red hair,0
+Dagger,common,A Steel dagger with a black leather wrapped handle,0
+Dagger,common,A steel dagger with a brown leather wrapped handle,0
+Dagger,common,A steel dagger with a polished oak handle,0
+Dagger,common,A steel dagger with a polished black wood handle,0
+Dagger,common,A steel dagger with a hemp wrapped handle,0
+Dagger,common,A steel dagger with no handle,0
+Dagger,common,A bronze dagger with a hemp wrapped handle,0
+Dagger,common,A bronze dagger with a black leather wrapped handle,0
+Dagger,common,A bronze dagger with a brown leather wrapped handle,0
+Dagger,common,A bronze dagger with a polished oak handle,0
+Dagger,common,A bronze dagger with a polished black wood handle,0
+Dagger,common,A bronze dagger with no handle,0
+Dagger,Common,"A dagger that magically glints in the light, its only magical property is that it is much harder to break or blunt",1
+Dagger,common,A wooden training dagger,0
+Sword,common,A wooden training short sword,0
+Sword,common,A wooden training long sword,0
 Sword,Common,"A sword that magically glints in the light, its only magical property is that it is much harder to break or blunt",1
+Coins,common,3d6 cp,0
+Coins,common,2d6 sp,0
+Coin,commmon,1 gp,0
 Armor of Gleaming,Common,Xge 136,1
 Bead of Nourishment,Common,Xge 136,1
 Bead of Refreshment,Common,Xge 136,1
 Boots of False Tracks,Common,Xge 136,1
 Candle of the Deep,Common,Xge 136,1
 Cast off Armor,Common,You can doff this armor as a action,1
+Charlatans Die,common,Xge 136,1
 Cloak of Billowing,Common,Xge 136,1
 Cloak of Many Fashions,Common,Xge 136,1
 Clockwork Amulet,Common,Xge 137,1
@@ -48,3 +119,8 @@ Wand of Conducting,Common,Xge 140,1
 Wand of Pyrotechnics,Common,Xge 140,1
 Wand of Scowls,Common,Xge 140,1
 Wand of Smiles,Common,Xge 140,1
+Potion of Climbing,common,Dmg 187,1
+Potion of Healing,common,Dmg 188,1
+Spell Scroll cantrip,common,Dmg 200,1
+Spell Scroll 1st,common,Dmg 200,1
+Prosthetic Limb,common,Tce 134,1
