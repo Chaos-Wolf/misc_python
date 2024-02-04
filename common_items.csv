@@ -1,8 +1,13 @@
+Bucket,common,Just a metal bucket,0
+Bucket,common,Just a wooden bucket,0
 Broom,Common,Just a broom,0
 Pan,Common,Cast iron pan,0
 Fork,common,A small metal fork,0
 Butter Knife,common,A small metal knife,0
 Broken Mirror,common,A small broken mirror,0
+Wooden Hammer,common,A small wooden hammer,0
+Hammer,common,A small metal hammer,0
+Axe,common,A common wood splitting axe,0
 History Book,common,A textbook about the history of Alba,0
 History Book,common,A textbook about the history of Fainne,0
 History Book,common,A textbook about the history of Udrar,0
@@ -12,7 +17,14 @@ History Book,common,A textbook about the history of Xogron,0
 History Book,common,A textbook about the history of Magic,0
 Ruined Book,common,A old book that has been waterlogged and is now unreadable,0
 Ruined Book,common,A old book that is charred and blackened to the point of unreadability,0
+Book of poems,common,A thin book of kinda bad poems,0
+Book of poems,common,A thin book of mediocre poems,0
+Book of poems,common,A thin book of pretty good poems,0
+Book of poems,common,A thin book of fantastic poems,0
 Scarf,common,A colorful wool scarf,0
+Wool Gloves,common,A pair of warm wool gloves,0
+Leather Gloves,common,A pair of leather gloves,0
+Sexton,common,A small brass sexton,0
 Spoon,common,A small metal spoon,0
 Necklace,common,A woven hemp necklace with a amber pendant,0
 Necklace,common,A woven hemp necklace with a wooden pendant,0

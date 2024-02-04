@@ -27,11 +27,11 @@ class item(object):
 		self.des = des
 		self.magic = magic
 	def __str__(self):
-		buffer = "--------------------\n"
+		buffer = "--------------------"
 		if int(self.magic) == 1:
-			return(buffer+self.rarity+" magical item\n"+self.name+"\n"+self.des+"\n"+buffer)
+			return(buffer+"\n"+self.rarity+" magical item\n"+self.name+"\n"+self.des+"\n"+buffer)
 		else:
-			return(buffer+self.rarity+" item\n"+self.name+"\n"+self.des+"\n"+buffer)
+			return(buffer+"\n"+self.rarity+" item\n"+self.name+"\n"+self.des+"\n"+buffer)
 		
 def load_from_csv(filename):
 	contents = []
@@ -78,5 +78,5 @@ def make_box(box_rarity):
 			temp_contents.append(all_items.legendary[dl.r()-1])
 		else:
 			print("how the fuck did you get here")
-	return(lootbox('test',box_rarity,temp_contents))
+	return(lootbox('lootbox',box_rarity,temp_contents))
 			
