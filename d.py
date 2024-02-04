@@ -82,4 +82,11 @@ d8 = d(8)
 d6 = d(6)
 d4 = d(4)
 coin = d(2)
+def bookshelf(n,one,two,thr,fou):
+	shelves = [d(one),d(two),d(thr),d(fou)]
+	for i in range(n):
+		temp = d4.r()
+		print("shelf: ",temp)
+		print("book: ",shelves[temp-1].r())
+		print("--------------")
 	
