@@ -89,4 +89,41 @@ def bookshelf(n,one,two,thr,fou):
 		print("shelf: ",temp)
 		print("book: ",shelves[temp-1].r())
 		print("--------------")
-	
+
+def fantasy_game_test(n):
+    full_list = []
+    norm = []
+    min_adv = []
+    mod_adv = []
+    maj_adv = []
+    min_dis = []
+    mod_dis = []
+    maj_dis = []
+    for i in range(n):
+        base = d8.rs(2)
+        min_mod = d4.r()
+        mod_mod = d6.r()
+        maj_mod = d8.r()
+        min_mod_less = d4.r()
+        mod_mod_less = d6.r()
+        maj_mod_less = d8.r()
+        norm.append(base)
+        min_adv.append(base + min_mod)
+        mod_adv.append(base + mod_mod)
+        maj_adv.append(base + maj_mod)
+        min_dis.append(base - min_mod_less)
+        mod_dis.append(base - mod_mod_less)
+        maj_dis.append(base - maj_mod_less)
+    full_list.append(min_dis)
+    full_list.append(mod_dis)
+    full_list.append(maj_dis)
+    full_list.append(norm)
+    full_list.append(min_adv)
+    full_list.append(mod_adv)
+    full_list.append(maj_adv)
+    for i in range(len(full_list)):
+        temp_list = []
+        for j in range(30):
+            temp_list.append(0)
+            temp_list[j]=round((full_list[i].count(-6 + j)/n)*100)
+        print(temp_list)
